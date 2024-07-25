@@ -10,15 +10,18 @@ import {
   Stack,
   Typography,
   Button
-} from "@mui/material";
-import {dateToString} from "../utils.ts";
-import {Gathering} from "../models/Gathering.ts";
+} from "@mui/material"
+import { dateToString } from "../utils.ts"
+import { Gathering } from "../models/Gathering"
+import { UpdateGathering } from "./UpdateGathering"
 
 interface Props{
   item: Gathering
+  handleDeleteGathering: (id: string) => void,
+  handleUpdateGathering: (gathering: Gathering) => void
 }
 
-export const DashboardCard = ({item}: Props) => {
+export const DashboardCard = ({item, handleDeleteGathering, handleUpdateGathering}: Props) => {
   return (
     <Paper>
       <Box sx={{ minWidth: 275 }}>
@@ -79,8 +82,14 @@ export const DashboardCard = ({item}: Props) => {
           </CardActions>
           <Divider/>
           <CardActions sx={{ background: '#ffeeee' }}>
-            <Button variant={"contained"} sx={{ flex: 1 }}>Update</Button>
-            <Button variant={"contained"} sx={{ flex: 1 }}>Delete</Button>
+            <UpdateGathering item={item} handleUpdateGathering={handleUpdateGathering}/>
+            <Button
+              variant={"contained"}
+              sx={{ flex: 1 }}
+              onClick={() => handleDeleteGathering(item.id)}
+            >
+              Delete
+            </Button>
           </CardActions>
         </Card>
       </Box>
