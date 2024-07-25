@@ -21,7 +21,7 @@ interface Props{
 export const GatheringCard = ({item}: Props) => {
 
   return (
-    <Paper>
+    <Paper sx={{ height: '100%' }}>
       <Box sx={{ minWidth: 275 }}>
         <Card variant={"outlined"}>
           <CardContent sx={{ background: '#e0e0ff' }}>

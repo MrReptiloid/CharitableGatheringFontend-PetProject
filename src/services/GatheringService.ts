@@ -8,7 +8,7 @@ export default class GatheringService {
   }
 
   static async Create(gathering: Gathering) {
-    return api.post("/gathering", { gathering })
+    return api.post("/gathering", gathering)
   }
 
   static async Update(gathering: Gathering){

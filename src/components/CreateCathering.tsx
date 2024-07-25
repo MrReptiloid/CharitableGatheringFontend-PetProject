@@ -1,6 +1,7 @@
 import {
   Box,
-  Button, Card,
+  Button,
+  Card,
   CardActions,
   CardContent,
   Divider,
@@ -10,16 +11,16 @@ import {
   TextField,
   Typography
 } from "@mui/material"
+import {Gathering} from "../models/Gathering"
 import {useState} from "react"
-import {Gathering} from "../models/Gathering.ts";
+import AddIcon from '@mui/icons-material/Add';
 
 interface Props {
-  item: Gathering
-  handleUpdateGathering: (gathering: Gathering) => void
+  handleCreateGathering: (gathering: Gathering) => void
 }
 
-export const UpdateGathering = ({item, handleUpdateGathering}: Props)=> {
-  const [gathering, setGathering] = useState(item)
+export const CreateGathering = ({handleCreateGathering}: Props) => {
+  const [gathering, setGathering] = useState({} as Gathering)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -52,13 +53,16 @@ export const UpdateGathering = ({item, handleUpdateGathering}: Props)=> {
 
   return (
     <>
-      <Button
-        variant={"contained"}
-        sx={{flex: 1}}
+      <Box
         onClick={handleOpenModal}
+        sx={{ height: '100%', minHeight: '300px', bgcolor: 'ffeeee' }}
       >
-        Update
-      </Button>
+        <Card variant={"outlined"} sx={{height: '100%'}}>
+          <CardContent sx={{ background: '#e0e0ff', height:'100%' }}>
+            <AddIcon color={"primary"} sx={{ width:'100%', height:'100%' }}/>
+          </CardContent>
+        </Card>
+      </Box>
       <Modal
         open={isModalOpen}
         onClose={handleCloseModal}
@@ -142,9 +146,9 @@ export const UpdateGathering = ({item, handleUpdateGathering}: Props)=> {
               <Button
                 variant={"contained"}
                 sx={{flex: 1}}
-                onClick={() => handleUpdateGathering(gathering)}
+                onClick={() => handleCreateGathering(gathering)}
               >
-                Save
+                Add
               </Button>
             </CardActions>
           </Card>

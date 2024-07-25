@@ -7,7 +7,7 @@ const Layout = () => {
     <>
       <Header/>
       <Container
-        sx={{ mt: '8px' }}
+        sx={{ mt: '8px', pb: '8px' }}
       >
         <Outlet/>
       </Container>
