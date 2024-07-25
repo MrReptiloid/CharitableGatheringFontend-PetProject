@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
-import { GatheringCard } from "./GatheringCard"
-import GatheringService from "../services/GatheringService"
+import { GatheringCard } from "../GatheringCard.tsx"
+import GatheringService from "../../services/GatheringService.ts"
 import { Grid } from "@mui/material";
 
-export const GatheringList = () => {
+export const Home = () => {
   const [ gatherings, setGatherings ] = useState([])
 
   useEffect(() => {

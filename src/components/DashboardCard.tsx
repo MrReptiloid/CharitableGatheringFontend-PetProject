@@ -1,25 +1,24 @@
 import {
+  Alert,
   Box,
   Card,
-  Link,
-  Alert,
-  Paper,
-  Stack,
-  Divider,
-  Typography,
   CardActions,
   CardContent,
-  LinearProgress,
-} from "@mui/material"
-import { Gathering } from "../models/Gathering";
-import { dateToString } from '../utils';
+  Divider,
+  LinearProgress, Link,
+  Paper,
+  Stack,
+  Typography,
+  Button
+} from "@mui/material";
+import {dateToString} from "../utils.ts";
+import {Gathering} from "../models/Gathering.ts";
 
 interface Props{
   item: Gathering
 }
 
-export const GatheringCard = ({item}: Props) => {
-
+export const DashboardCard = ({item}: Props) => {
   return (
     <Paper>
       <Box sx={{ minWidth: 275 }}>
@@ -33,8 +32,8 @@ export const GatheringCard = ({item}: Props) => {
               <Typography>{dateToString(item.createdDate)}</Typography>
               {
                 item.isVerified
-                ? <Alert severity="success">Verified</Alert>
-                : <Alert severity="warning">No Information</Alert>
+                  ? <Alert severity="success">Verified</Alert>
+                  : <Alert severity="warning">No Information</Alert>
               }
             </Stack>
             <Typography
@@ -45,8 +44,8 @@ export const GatheringCard = ({item}: Props) => {
             <LinearProgress
               value={
                 item.targetAmount === 0
-                ? 0
-                : item.currentAmount / item.targetAmount * 100
+                  ? 0
+                  : item.currentAmount / item.targetAmount * 100
               }
               variant="determinate"
               sx={{ height: '10px', borderRadius: '5px'}}
@@ -56,8 +55,8 @@ export const GatheringCard = ({item}: Props) => {
             >
               <Stack
                 direction={"row"}
-               justifyContent={"space-between"}
-               alignItems={"center"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
               >
                 <Typography variant={"h5"}>All collected</Typography>
                 <Typography variant={"h5"}>{item.currentAmount}/{item.targetAmount}</Typography>
@@ -77,6 +76,11 @@ export const GatheringCard = ({item}: Props) => {
             <Link href={`/${item.id}`} sx={{ m: 'auto' }}>
               ViewDetail
             </Link>
+          </CardActions>
+          <Divider/>
+          <CardActions sx={{ background: '#ffeeee' }}>
+            <Button variant={"contained"} sx={{ flex: 1 }}>Update</Button>
+            <Button variant={"contained"} sx={{ flex: 1 }}>Delete</Button>
           </CardActions>
         </Card>
       </Box>

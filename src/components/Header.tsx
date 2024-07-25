@@ -15,8 +15,9 @@ import {
   ListItemButton,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu"
+import { Link } from "react-router-dom";
 
-const navElements = ['Home', 'About', 'Contact']
+const navElements = ['Home', 'About', 'Contact', 'Admin']
 const drawerWidth = 240;
 
 interface Props {
@@ -55,9 +56,11 @@ export const Header = (props: Props) => {
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {
               navElements.map((item) => (
-                <Button key={item} sx={{ color: '#fff'}}>
-                  {item}
-                </Button>
+                <Link to={item}>
+                  <Button key={item} sx={{ color: '#fff'}}>
+                    {item}
+                  </Button>
+                </Link>
               ))
             }
           </Box>
@@ -85,11 +88,13 @@ export const Header = (props: Props) => {
             <List>
               {
                 navElements.map((item) => (
-                  <ListItem key={item} disablePadding>
-                    <ListItemButton sx={{ textAlign: 'center' }}>
-                      <ListItemText primary={item} />
+                  <Link to={item}>
+                    <ListItem key={item} disablePadding>
+                      <ListItemButton sx={{ textAlign: 'center' }}>
+                        <ListItemText primary={item} />
                       </ListItemButton>
-                  </ListItem>
+                    </ListItem>
+                  </Link>
                 ))
               }
             </List>
