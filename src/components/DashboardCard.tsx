@@ -5,15 +5,16 @@ import {
   CardActions,
   CardContent,
   Divider,
-  LinearProgress, Link,
+  LinearProgress,
   Paper,
   Stack,
   Typography,
-  Button
+  Button, Modal
 } from "@mui/material"
 import { dateToString } from "../utils.ts"
 import { Gathering } from "../models/Gathering"
 import { UpdateGathering } from "./UpdateGathering"
+import {useState} from "react";
 
 interface Props{
   item: Gathering
@@ -22,11 +23,34 @@ interface Props{
 }
 
 export const DashboardCard = ({item, handleDeleteGathering, handleUpdateGathering}: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxwidth: 400,
+    width: '90%',
+    bgcolor: 'background.paper',
+    border: '5px solid #e0e0ff',
+    boxShadow: 24,
+    borderRadius: "4px"
+  }
+
   return (
-    <Paper>
-      <Box sx={{ minWidth: 275 }}>
-        <Card variant={"outlined"}>
-          <CardContent sx={{ background: '#e0e0ff' }}>
+    <Paper sx={{ height: '100%' }}>
+      <Box sx={{ minWidth: 275, height: '100%' }}>
+        <Card variant={"outlined"} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <CardContent sx={{ background: '#e0e0ff', flex: 1 }} >
             <Stack
               direction={"row"}
               justifyContent={"space-between"}
@@ -76,9 +100,29 @@ export const DashboardCard = ({item, handleDeleteGathering, handleUpdateGatherin
           </CardContent>
           <Divider/>
           <CardActions>
-            <Link href={`/${item.id}`} sx={{ m: 'auto' }}>
-              ViewDetail
-            </Link>
+            <Button
+              variant={"contained"}
+              sx={{flex: 1}}
+              onClick={handleOpenModal}
+              >
+              View Description
+          </Button>
+          <Modal
+            open={isModalOpen}
+            onClose={handleCloseModal}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Card variant={"outlined"} sx={{borderRadius: 0, border: "none"}}>
+                <CardContent sx={{background: '#e0e0ff'}}>
+                  <Typography>
+                    {item.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
+          </Modal>
           </CardActions>
           <Divider/>
           <CardActions sx={{ background: '#ffeeee' }}>

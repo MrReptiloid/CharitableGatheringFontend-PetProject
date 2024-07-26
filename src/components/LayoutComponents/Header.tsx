@@ -17,7 +17,16 @@ import {
 import MenuIcon from "@mui/icons-material/Menu"
 import { Link } from "react-router-dom";
 
-const navElements = ['Home', 'About', 'Contact', 'Admin']
+const navElements = [
+  {
+    title: "Home",
+    path: "/"
+  },
+  {
+    title: "Admin",
+    path: "/admin"
+  },
+]
 const drawerWidth = 240;
 
 interface Props {
@@ -51,14 +60,14 @@ export const Header = (props: Props) => {
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            DonateSVO
+            CharitableGathering
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {
               navElements.map((item) => (
-                <Link to={item}>
-                  <Button key={item} sx={{ color: '#fff'}}>
-                    {item}
+                <Link to={item.path}>
+                  <Button key={item.title} sx={{ color: '#fff'}}>
+                    {item.title}
                   </Button>
                 </Link>
               ))
@@ -82,16 +91,16 @@ export const Header = (props: Props) => {
         >
           <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
             <Typography variant="h6" sx={{ my:2 }}>
-              DonateSVO
+              CharitableGathering
             </Typography>
             <Divider/>
             <List>
               {
                 navElements.map((item) => (
-                  <Link to={item}>
-                    <ListItem key={item} disablePadding>
+                  <Link to={item.path}>
+                    <ListItem key={item.title} disablePadding>
                       <ListItemButton sx={{ textAlign: 'center' }}>
-                        <ListItemText primary={item} />
+                        <ListItemText primary={item.title} />
                       </ListItemButton>
                     </ListItem>
                   </Link>
